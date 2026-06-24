@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ets ANIWANOU &fils</title>
+    <style>
+        /* ----- STYLE GENERAL ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            /* OPTION 2 : FOND D'ÉCRAN DÉGRADÉ */
+            background: linear-gradient(145deg, #f6f0ea 0%, #d4c5b2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .conteneur-principal {
+            max-width: 600px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px);
+            border-radius: 30px;
+            padding: 25px 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        /* ---- EN-TÊTE AVEC LE TITRE ET LE PANIER (OPTION 3 + ARGENT) ---- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #b8860b;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #5a3e1b;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        /* Le badge du panier (version avec argent) */
+        .cart-badge {
+            background-color: #2c3e50;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column; /* On met le total en dessous */
+            align-items: center;
+            gap: 2px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            min-width: 100px;
+        }
+        .cart-badge .ligne1 {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .cart-badge .total {
+            background-color: #e67e22;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 15px;
+            color: white;
+            margin-top: 2px;
+        }
+        .cart-badge .quantite {
+            background-color: #e74c3c;
+            padding: 0 8px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        /* ----- MENU DE NAVIGATION ----- */
+        .menu {
+            display: flex;
+            background-color: #2c3e50;
+            border-radius: 50px;
+            padding: 5px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .menu-item {
+            flex: 1;
+            text-align: center;
+            padding: 12px 5px;
+            font-weight: bold;
+            font-size: 15px;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:active { transform: scale(0.95); }
+        .menu-item.active {
+            background-color: #b8860b;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* ----- ZONE DE CONTENU ----- */
+        #zoneContenu {
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 16px;
+            padding: 20px;
+            min-height: 200px;
+            border: 1px solid #f0e4d5;
+            transition: all 0.3s ease;
+        }
+
+        /* ----- STYLES POUR L'ACCUEIL ----- */
+        .message-bienvenue {
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: center;
+            color: #2c3e50;
+        }
+        .message-bienvenue span {
+            display: block;
+            margin-top: 15px;
+            font-size: 20px;
+            color: #b8860b;
+        }
+
+        /* ----- STYLES POUR LA LISTE DES PRODUITS (AVEC PRIX) ----- */
+        #zoneContenu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #zoneContenu li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #2c3e50;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            flex-wrap: wrap; /* Pour passer à la ligne sur très petit écran */
+        }
+
+        .article-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .article-prix {
+            font-size: 14px;
+            color: #b8860b;
+            font-weight: bold;
+        }
+
+        /* Couleurs pour chaque produit */
+        .article-item:nth-child(1) { border-left: 5px solid #e74c3c; }
+        .article-item:nth-child(2) { border-left: 5px solid #f1c40f; }
+        .article-item:nth-child(3) { border-left: 5px solid #2ecc71; }
+        .article-item:nth-child(4) { border-left: 5px solid #3498db; }
+
+        /* Le petit bouton "➕ Ajouter" */
+        .btn-add {
+            background-color: #27ae60;
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            transition: transform 0.1s;
+            white-space: nowrap;
+        }
+        .btn-add:active {
+            transform: scale(0.90);
+            background-color: #1e8449;
+        }
+
+        /* Bouton WhatsApp */
+        .btn-whatsapp {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #25D366;
+            color: white;
+            font-weight: bold;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: transform 0.2s;
+        }
+        .btn-whatsapp:active { transform: scale(0.97); }
+
+        /* ----- STYLES POUR LE CONTACT ----- */
+        .info-contact {
+            text-align: center;
+            font-size: 18px;
+            color: #2c3e50;
+            padding: 10px;
+        }
+        .info-contact span {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+
+<div class="conteneur-principal">
+
+    <!-- EN-TÊTE : Titre + Panier avec TOTAL (NOUVEAU) -->
+    <div class="header">
+        <h1>🏪 Ets MAHOUDO</h1>
+        <div class="cart-badge">
+            <div class="ligne1">
+                🛒 <span class="quantite" id="cartCount">0</span> article(s)
+            </div>
+            <div class="total" id="cartTotal">0 FCFA</div>
+        </div>
+    </div>
+
+    <!-- MENU DE NAVIGATION -->
+    <div class="menu">
+        <div class="menu-item active" data-page="accueil">🏠 Accueil</div>
+        <div class="menu-item" data-page="produits">📦 Produits</div>
+        <div class="menu-item" data-page="contact">📞 Contact</div>
+    </div>
+
+    <!-- ZONE DE CONTENU -->
+    <div id="zoneContenu">
+        <div class="message-bienvenue">
+            Salut ! Nous sommes ravis de vous voir intéressé à notre page, <br>
+            vous êtes la bienvenue 🎉
+            <span>👋 Faites votre choix dans le menu ci-dessus</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // ---- 1. LOGIQUE DU PANIER AVEC PRIX (TOTAL EN ARGENT) ----
+    let cartCount = 0;
+    let cartTotal = 0; // Nouvelle variable pour le montant total
+
+    // Fonction pour mettre à jour l'affichage du panier
+    function updateCartDisplay() {
+        document.getElementById('cartCount').textContent = cartCount;
+        // On formate le nombre avec des espaces pour les milliers (ex: 4500 -> 4 500)
+        let totalFormate = cartTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        document.getElementById('cartTotal').textContent = totalFormate + " FCFA";
+    }
+
+    // Cette fonction est appelée quand on clique sur "Ajouter"
+    // Elle prend maintenant le NOM et le PRIX en paramètres
+    function ajouterAuPanier(nomProduit, prix) {
+        cartCount = cartCount + 1;          // +1 article
+        cartTotal = cartTotal + prix;        // On ajoute le prix au total
+        updateCartDisplay();                 // On rafraîchit l'affichage
+        alert("✅ " + nomProduit + " (" + prix + " FCFA) ajouté au panier !");
+    }
+
+    // ---- 2. LOGIQUE DE LA NAVIGATION (MENU) ----
+    const menuItems = document.querySelectorAll('.menu-item');
+    const zoneContenu = document.getElementById('zoneContenu');
+
+    function afficherPage(nomPage) {
+        // Mettre à jour la classe "active"
+        menuItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.dataset.page === nomPage) {
+                item.classList.add('active');
+            }
+        });
+
+        // Remplir le contenu
+        if (nomPage === 'accueil') {
+            zoneContenu.innerHTML = `
+                <div class="message-bienvenue">
+                    Salut ! Nous sommes ravis de vous voir intéressé à notre page, <br>
+                    vous êtes la bienvenue 🎉
+                    <span>🏪 Découvrez nos produits exceptionnels !
+                    CLIENT EST LE ROI</span>
+                </div>
+            `;
+        } 
+        else if (nomPage === 'produits') {
+            // On affiche les produits avec leurs PRIX et les boutons qui envoient le prix
+            zoneContenu.innerHTML = `
+                <ul>
+                    <li class="article-item">
+                        <div class="article-info">
+                            🧴 Les gels de douche
+                            <span class="article-prix">💰 1 500 FCFA</span>
+                        </div>
+                        <button class="btn-add" onclick="ajouterAuPanier('Gel douche', 1500)">➕ Ajouter</button>
+                    </li>
+                    <li class="article-item">
+                        <div class="article-info">
+                            🍯 Le miel original
+                            <span class="article-prix">💰 3 000 FCFA</span>
+                        </div>
+                        <button class="btn-add" onclick="ajouterAuPanier('Miel original', 3000)">➕ Ajouter</button>
+                    </li>
+                    <li class="article-item">
+                        <div class="article-info">
+                            🧼 Savon artisanal
+                            <span class="article-prix">💰 1 000 FCFA</span>
+                        </div>
+                        <button class="btn-add" onclick="ajouterAuPanier('Savon karité', 1000)">➕ Ajouter</button>
+                    </li>
+                    <li class="article-item">
+                        <div class="article-info">
+                            🌿 Huile essentielle
+                            <span class="article-prix">💰 2000 FCFA</span>
+                        </div>
+                        <button class="btn-add" onclick="ajouterAuPanier('Huile citron', 2000)">➕ Ajouter</button>
+                    </li>
+                </ul>
+                <a href="https://wa.me/2290199579160?text=Bonjour%20Ets%20MAHOUDO%20!%20Je%20souhaite%20commander%20vos%20produits." 
+                   target="_blank" 
+                   class="btn-whatsapp">
+                   💬 Commander via WhatsApp
+                </a>
+            `;
+        } 
+        else if (nomPage === 'contact') {
+            zoneContenu.innerHTML = `
+                <div class="info-contact">
+                    📞 Pour toute question, contactez-nous directement : <br>
+                    <span> 📩 aniwanouw@gmail.com</span>
+                    <span>📱 +229 0196052207</span>
+                    <p style="margin-top:15px; font-size:14px; color:#888;">
+                        Nous vous répondons dans les meilleurs délais !
+                    Vos satisfactions sont nos joies !</p>
+                </div>
+            `;
+            alert("📞 Merci pour votre intérêt ! Un conseiller vous répondra sous 24h.");
+        }
+    }
+
+    // ---- 3. ATTRIBUER LES CLICS AUX ONGLETS ----
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const page = this.dataset.page;
+            afficherPage(page);
+        });
+    });
+
+    // Initialisation du panier (0 article, 0 FCFA)
+    updateCartDisplay();
+</script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a3be2b8b755bc1d4b9a5686/1jrsur8f7';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script--></body>
+</html>
