@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ets MAHOUDO - Produits traditionnels et bien-être</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(145deg, #f6f0ea 0%, #d4c5b2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .conteneur-principal {
+            max-width: 600px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px);
+            border-radius: 30px;
+            padding: 25px 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #b8860b;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        h1 {
+            color: #5a3e1b;
+            font-size: 22px;
+            margin: 0;
+        }
+        #userStatus {
+            font-size: 13px;
+            color: #2c3e50;
+            background-color: #f0e4d5;
+            padding: 5px 12px;
+            border-radius: 30px;
+        }
+        .menu {
+            display: flex;
+            background-color: #2c3e50;
+            border-radius: 50px;
+            padding: 5px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .menu-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px 3px;
+            font-weight: bold;
+            font-size: 13px;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 60px;
+        }
+        .menu-item:active { transform: scale(0.95); }
+        .menu-item.active {
+            background-color: #b8860b;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        #zoneContenu {
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 16px;
+            padding: 20px;
+            min-height: 200px;
+            border: 1px solid #f0e4d5;
+            transition: all 0.3s ease;
+        }
+        .message-bienvenue {
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: center;
+            color: #2c3e50;
+        }
+        .message-bienvenue span {
+            display: block;
+            margin-top: 15px;
+            font-size: 20px;
+            color: #b8860b;
+        }
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+        .auth-form input {
+            padding: 14px;
+            border-radius: 30px;
+            border: 1px solid #d4c5b2;
+            font-size: 16px;
+            background-color: white;
+            outline: none;
+        }
+        .auth-form input:focus {
+            border-color: #b8860b;
+            box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.2);
+        }
+        .auth-form button {
+            padding: 14px;
+            border-radius: 30px;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background-color: #2c3e50;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .auth-form button:active { transform: scale(0.95); }
+        .auth-form button.btn-inscrire { background-color: #27ae60; }
+        #zoneContenu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #zoneContenu li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #2c3e50;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+        }
+        .article-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .article-prix {
+            font-size: 14px;
+            color: #b8860b;
+            font-weight: bold;
+        }
+        .article-desc {
+            font-size: 12px;
+            color: #888;
+            margin-top: 3px;
+        }
+        .article-item:nth-child(1) { border-left: 5px solid #e74c3c; }
+        .article-item:nth-child(2) { border-left: 5px solid #f1c40f; }
+        .article-item:nth-child(3) { border-left: 5px solid #2ecc71; }
+        .article-item:nth-child(4) { border-left: 5px solid #3498db; }
+        .article-item:nth-child(5) { border-left: 5px solid #e67e22; }
+        .article-item:nth-child(6) { border-left: 5px solid #e67e22; }
+        .article-item:nth-child(7) { border-left: 5px solid #e67e22; }
+        .article-item:nth-child(8) { border-left: 5px solid #e67e22; }
+        .article-item:nth-child(9) { border-left: 5px solid #e67e22; }
+        .btn-add {
+            background-color: #27ae60;
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            transition: transform 0.1s;
+            white-space: nowrap;
+        }
+        .btn-add:active {
+            transform: scale(0.90);
+            background-color: #1e8449;
+        }
+        .btn-whatsapp {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #25D366;
+            color: white;
+            font-weight: bold;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: transform 0.2s;
+        }
+        .btn-whatsapp:active { transform: scale(0.97); }
+        .info-contact {
+            text-align: center;
+            font-size: 18px;
+            color: #2c3e50;
+            padding: 10px;
+        }
+        .info-contact span {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #e67e22;
+        }
+        .cart-badge {
+            background-color: #2c3e50;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            min-width: 90px;
+        }
+        .cart-badge .ligne1 {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .cart-badge .total {
+            background-color: #e67e22;
+            padding: 1px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: white;
+        }
+        .cart-badge .quantite {
+            background-color: #e74c3c;
+            padding: 0 8px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        .btn-clear-cart {
+            background-color: transparent;
+            border: 1px solid #e74c3c;
+            color: #e74c3c;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .btn-clear-cart:active {
+            background-color: #e74c3c;
+            color: white;
+            transform: scale(0.90);
+        }
+        .btn-deconnexion {
+            background-color: #e74c3c;
+            border: none;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .btn-deconnexion:active { transform: scale(0.95); }
+        .a-propos {
+            text-align: left;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+        .a-propos h3 {
+            color: #b8860b;
+            margin: 20px 0 10px;
+        }
+        .a-propos p {
+            margin-bottom: 15px;
+        }
+        .a-propos .valeur {
+            background-color: #fff8f0;
+            padding: 10px 15px;
+            border-radius: 10px;
+            border-left: 4px solid #b8860b;
+            margin-bottom: 10px;
+        }
+        .avertissement {
+            background-color: #fff8f0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #e67e22;
+            font-size: 14px;
+            color: #555;
+        }
+        .produit-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-right: 12px;
+            border: 1px solid #eee;
+        }
+        .produit-content {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="conteneur-principal">
+
+    <div class="header">
+        <h1>🏪 Ets MAHOUDO</h1>
+        <div id="userStatus">
+            👤 <span id="userName">Visiteur</span>
+        </div>
+    </div>
+
+    <div style="display:flex; justify-content:flex-end; margin-bottom:10px;">
+        <div class="cart-badge">
+            <div class="ligne1">
+                🛒 <span class="quantite" id="cartCount">0</span> art.
+                <button class="btn-clear-cart" onclick="viderPanier()">🗑️</button>
+            </div>
+            <div class="total" id="cartTotal">0 FCFA</div>
+        </div>
+    </div>
+
+    <div class="menu">
+        <div class="menu-item active" data-page="accueil">🏠 Accueil</div>
+        <div class="menu-item" data-page="produits">📦 Produits</div>
+        <div class="menu-item" data-page="a-propos">📖 À propos</div>
+        <div class="menu-item" data-page="auth">🔐 Connexion</div>
+        <div class="menu-item" data-page="contact">📞 Contact</div>
+    </div>
+
+    <div id="zoneContenu">
+        <div class="message-bienvenue">
+            Salut ! Nous sommes ravis de vous voir intéressé à notre page, <br>
+            vous êtes la bienvenue 🎉
+            <span>🏪 Découvrez nos produits exceptionnels !</span>
+        </div>
+    </div>
+
+</div>
+<script type="importmap">
+{
+  "imports": {
+    "firebase-app": "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js",
+    "firebase-auth": "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"
+  }
+}
+</script>
+
+<script type="module">
+// ----- 1. IMPORTER FIREBASE -----
+import { initializeApp } from "firebase-app";
+import { 
+  getAuth, 
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut 
+} from "firebase-auth";
+
+// ----- 2. 🔑 COLLE TES CLÉS ICI (remplace par les tiennes) -----
+const firebaseConfig ={
+  apiKey: "AIzaSyC0L3oFKB8Eo6vr1jZlUtI1EvZ0rBq0jEI",
+  authDomain: "ets-mahoudo-backend-51373.firebaseapp.com",
+  projectId: "ets-mahoudo-backend-51373",
+  storageBucket: "ets-mahoudo-backend-51373.firebasestorage.app",
+  messagingSenderId: "1060047627554",
+  appId: "1:1060047627554:web:20bdecbc2f2fa22329717b"};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// ----- 3. RÉFÉRENCES HTML -----
+const zoneContenu = document.getElementById('zoneContenu');
+const userNameSpan = document.getElementById('userName');
+const menuItems = document.querySelectorAll('.menu-item');
+
+// Variables du panier
+let cart = [];
+let cartCount = 0;
+let cartTotal = 0;
+
+// ----- 4. AFFICHER LE BON MENU EN FONCTION DE LA CONNEXION -----
+function updateMenuForUser(user) {
+  const menuAuth = document.querySelector('.menu-item[data-page="auth"]');
+  if (user) {
+    menuAuth.innerHTML = '🚪 Déconnexion';
+    menuAuth.style.display = 'block';
+    menuAuth.replaceWith(menuAuth.cloneNode(true));
+    const newMenuAuth = document.querySelector('.menu-item[data-page="auth"]');
+    newMenuAuth.addEventListener('click', function(e) {
+      e.stopPropagation();
+      signOut(auth).then(() => {
+        alert("👋 Vous êtes déconnecté.");
+        afficherPage('accueil');
+      }).catch((error) => {
+        alert("Erreur : " + error.message);
+      });
+    });
+  } else {
+    menuAuth.innerHTML = '🔐 Connexion';
+    menuAuth.style.display = 'block';
+    menuAuth.replaceWith(menuAuth.cloneNode(true));
+    const newMenuAuth = document.querySelector('.menu-item[data-page="auth"]');
+    newMenuAuth.addEventListener('click', function() {
+      afficherPage('auth');
+    });
+  }
+}
+
+// ----- 5. SURVEILLER L'ÉTAT DE CONNEXION -----
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    userNameSpan.textContent = user.email;
+    updateMenuForUser(user);
+    const activePage = document.querySelector('.menu-item.active');
+    if (activePage && activePage.dataset.page === 'auth') {
+      afficherPage('accueil');
+    }
+    if (activePage && activePage.dataset.page === 'produits') {
+      afficherPage('produits');
+    }
+  } else {
+    userNameSpan.textContent = 'Visiteur';
+    updateMenuForUser(null);
+    const activePage = document.querySelector('.menu-item.active');
+    if (activePage && activePage.dataset.page === 'produits') {
+      afficherPage('produits');
+    }
+  }
+});
+
+// ----- 6. AFFICHER LES PAGES -----
+function afficherPage(nomPage) {
+  menuItems.forEach(item => {
+    item.classList.remove('active');
+    if (item.dataset.page === nomPage) {
+      item.classList.add('active');
+    }
+  });
+
+  const user = auth.currentUser;
+
+  // ========== PAGE ACCUEIL ==========
+  if (nomPage === 'accueil') {
+    zoneContenu.innerHTML = `
+      <div class="message-bienvenue">
+        Salut ${user ? user.email : 'Visiteur'} !<br>
+        Bienvenue sur le site officiel de <strong>Ets MAHOUDO</strong>.
+        <span>🏪 Découvrez nos produits de bien-être et traditionnels !</span>
+        <p style="margin-top:20px; font-size:16px; color:#555;">
+          🌿 Des produits naturels pour votre santé et votre bien-être.
+        </p>
+        <p style="font-size:14px; color:#888;">
+          👉 Cliquez sur <strong>"Produits"</strong> pour voir notre catalogue.
+        </p>
+      </div>
+    `;
+  }
+
+  // ========== PAGE PRODUITS ==========
+  else if (nomPage === 'produits') {
+    if (!user) {
+      zoneContenu.innerHTML = `
+        <div style="text-align:center; padding:30px 0;">
+          <h2 style="color:#e74c3c;">🔒 Contenu réservé</h2>
+          <p style="margin:20px 0;">Connectez-vous pour voir nos produits et passer commande.</p>
+          <button onclick="document.querySelector('.menu-item[data-page=\\'auth\\']').click();" 
+                  style="padding:12px 30px; background-color:#b8860b; color:white; border:none; border-radius:30px; font-weight:bold; cursor:pointer;">
+            🔐 Se connecter
+          </button>
+        </div>
+      `;
+      return;
+    }
+
+    zoneContenu.innerHTML = `
+      <h3 style="color:#b8860b; margin-bottom:15px;">🧴 Produits de bien-être</h3>
+      <ul>
+        <li class="article-item">
+          <div class="produit-content">
+            <img src="<a href="https://imgbb.com/"><img src="<a href="https://imgbb.com/"><img src="https://i.ibb.co/Y4S6JjcR/70542.jpg" alt="70542" border="0"></a> <div class="article-info">
+              🧴 Les gels de douche
+              <span class="article-prix">💰 1 500 FCFA</span>
+              <span class="article-desc">Gel douche parfumé aux huiles essentielles</span>
+            </div>
+          </div>
+          <button class="btn-add" onclick="ajouterAuPanier('Gel douche', 1500)">➕ Ajouter</button>
+        </li>
+        <li class="article-item">
+          <div class="produit-content">
+            <img src="<a href="https://ibb.co/Pv80JvPW"><img src="https://i.ibb.co/Pv80JvPW/70546.jpg" alt="70546" border="0"></a>
+            <div class="article-info">
+              🍯 Le miel original
+              <span class="article-prix">💰 3 000 FCFA</span>
+              <span class="article-desc">Miel pur de la région, non filtré</span>
+            </div>
+          </div>
+          <button class="btn-add" onclick="ajouterAuPanier('Miel original', 3000)">➕ Ajouter</button>
+        </li>
+        <li class="article-item">
+          <div class="produit-content">
+            <img src="<a href="https://imgbb.com/"><img src="https://i.ibb.co/8pftJSt/70544.jpg" alt="70544" border="0"></a>
+            <div class="article-info">
+              🧼 Savon artisanal au karité
+              <span class="article-prix">💰 1 000 FCFA</span>
+              <span class="article-desc">Savon doux, 100% naturel</span>
+            </div>
+          </div>
+          <button class="btn-add" onclick="ajouterAuPanier('Savon karité', 1000)">➕ Ajouter</button>
+        </li>
+      </ul>
+
+      <h3 style="color:#b8860b; margin:30px 0 15px;">🌿 Produits traditionnels</h3>
+      <div class="avertissement">
+        ⚠️ Produits issus de la pharmacopée traditionnelle. Les informations sont à titre informatif.<br>
+        Consultez un professionnel de santé avant utilisation.
+      </div>
+      <ul>
+        <li class="article-item">
+          <div class="produit-content">
+            <img src="<a href="https://imgbb.com/"><img src="https://i.ibb.co/Xrtz38L7/70550.jpg" alt="70550" border="0"></a>
+            <div class="article-info">
+              🌿 Anti-toux
+              <span class="article-prix">💰 2 500 FCFA</span>
+              <span class="article-desc">Préparation traditionnelle pour soulager les toux</span>
+            </div>
+          </div>
+          <button class="btn-add" onclick="ajouterAuPanier('Anti-toux', 2500)">➕ Ajouter</button>
+        </li>
+        <li class="article-item">
+          <div class="produit-content">
+            <img src="<a href="https://imgbb.com/"><img src=<a href="https://imgbb.com/"><img src="<a href="https://imgbb.com/"><img src="https://i.ibb.co/jsYYtQP/70548.jpg" alt="70548" border="0"></a>
+            <div class="article-info">
+              🌿 Anti-hémorroïdes (interne/externe)
+              <span class="article-prix">💰 3 500 FCFA</span>
+              <span class="article-desc">Traitement traditionnel pour les hémorroïdes</span>
+            </div>
+          </div>
+          <button class="btn-add" onclick="ajouterAuPanier('Anti-hémorroïdes', 3500)">➕ Ajouter</button>
+        </li>
+        <li class="article-item">
+          <div class="produit-content">
+            <img src="<a href="https://imgbb.com/"><img src="https://i.ibb.co/RRCZF02/70551.jpg" alt="70551" border="0"></a>
+            <div class="article-info">
+              🌿 Tonus et vitalité
+              <span class="article-prix">💰 4 000 FCFA</span>
+              <span class="article-desc">Préparation pour la vitalité masculine</span>
+            </div>
+          </div>
+          <button class="btn-add" onclick="ajouterAuPanier('Tonus vitalité', 4000)">➕ Ajouter</button>
+        </li>
+        <li class="article-item">
+          <div class="produit-content">
+            <img src="<a href="https://imgbb.com/"><img src="https://i.ibb.co/ks3D6dTs/70543.jpg" alt="70543" border="0"></a>
+            <div class="article-info">
+              🌿 Retour d'affection
+              <span class="article-prix">💰 5 000 FCFA</span>
+              <span class="article-desc">Préparation pour l'harmonie des relations</span>
+            </div>
+          </div>
+          <button class="btn-add" onclick="ajouterAuPanier('Retour affection', 5000)">➕ Ajouter</button>
+        </li>
+        <li class="article-item">
+          <div class="produit-content">
+            <img src="<a href="https://imgbb.com/"><img src="https://i.ibb.co/N2sY38YG/70545.jpg" alt="70545" border="0"></a>
+            <div class="article-info">
+              🔥Les produits de Retour à l'envoyeur
+              <span class="article-prix">💰 5 500 FCFA</span>
+              <span class="article-desc">Préparation pour les cas de force négative</span>
+            </div>
+          </div>
+          <button class="btn-add" onclick="ajouterAuPanier('Retour envoyeur', 5500)">➕ Ajouter</button>
+        </li>
+      </ul>
+
+      <div style="margin-top:25px; background-color:#e8f5e9; padding:15px; border-radius:10px; border-left:4px solid #27ae60;">
+        <p style="font-weight:bold; color:#2c3e50;">📦 Comment commander ?</p>
+        <p style="font-size:14px; color:#555;">Ajoutez vos produits au panier, puis cliquez sur "Commander via WhatsApp" pour confirmer.</p>
+      </div>
+
+      <a href="#" id="btnWhatsappCommande" target="_blank" class="btn-whatsapp">
+        💬 Commander via WhatsApp
+      </a>
+    `;
+
+    // WhatsApp avec récapitulatif auto
+    const btnWhatsapp = document.getElementById('btnWhatsappCommande');
+    if (btnWhatsapp) {
+      btnWhatsapp.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (cart.length === 0) {
+          alert("🛒 Votre panier est vide. Ajoutez des produits d'abord !");
+          return;
+        }
+        let message = "Bonjour Ets MAHOUDO ! Je souhaite passer une commande :\n\n";
+        let total = 0;
+        cart.forEach(item => {
+          message += `- ${item.nom} × ${item.quantite} = ${item.prix * item.quantite} FCFA\n`;
+          total += item.prix * item.quantite;
+        });
+        message += `\n📦 TOTAL : ${total} FCFA\n\n`;
+        message += "Merci ! 🛒";
+        const messageEncode = encodeURIComponent(message);
+        const lienWhatsApp = `https://wa.me/2290199579160?text=${messageEncode}`;
+        window.open(lienWhatsApp, '_blank');
+      });
+    }
+  }
+
+  // ========== PAGE "À PROPOS" ==========
+  else if (nomPage === 'a-propos') {
+    zoneContenu.innerHTML = `
+      <div class="a-propos">
+        <h2 style="color:#b8860b; text-align:center;">📖 À propos de Ets MAHOUDO</h2>
+        <p style="text-align:center; font-size:16px; color:#555; margin:10px 0;">
+          <em>"La nature au service de votre bien-être"</em>
+        </p>
+        <h3>🌿 Notre histoire</h3>
+        <p>
+          Ets MAHOUDO est une entreprise familiale basée au Bénin, spécialisée dans la 
+          <strong>vente de produits naturels et traditionnels</strong>. Forts de plusieurs années 
+          d'expérience dans la pharmacopée traditionnelle, nous mettons à votre disposition 
+          des produits de qualité pour votre santé et votre bien-être.
+        </p>
+        <h3>🧴 Nos produits</h3>
+        <p>Nous proposons une gamme variée de produits :</p>
+        <ul style="margin-left:20px; color:#555;">
+          <li>🧴 <strong>Bien-être</strong> : gels douche, miel pur, savons artisanaux</li>
+          <li>🌿 <strong>Traditionnels</strong> : préparations à base de plantes pour la toux, les hémorroïdes, la vitalité, etc.</li>
+        </ul>
+        <h3>🤝 Nos valeurs</h3>
+        <div class="valeur"><strong>🌱 Naturel</strong> — Tous nos produits sont issus de ressources naturelles, sans produits chimiques nocifs.</div>
+        <div class="valeur"><strong>🤲 Authenticité</strong> — Nous perpétuons le savoir-faire traditionnel transmis par nos aînés.</div>
+        <div class="valeur"><strong>💚 Confiance</strong> — Nous croyons en la transparence et l'honnêteté envers nos clients.</div>
+        <h3>📞 Contactez-nous</h3>
+        <p>📧 <strong>aniwanouw@gmail.com</strong><br>📱 <strong>+2290196052207</strong></p>
+        <div style="margin-top:20px; background-color:#f0f7f0; padding:15px; border-radius:10px; text-align:center;">
+          <p style="font-size:14px; color:#888;">⚠️ Les informations sur les produits traditionnels sont données à titre informatif.<br>Nous vous conseillons de consulter un professionnel de santé.</p>
+        </div>
+      </div>
+    `;
+  }
+
+  // ========== PAGE AUTH ==========
+  else if (nomPage === 'auth') {
+    if (user) {
+      afficherPage('accueil');
+      return;
+    }
+    zoneContenu.innerHTML = `
+      <div style="max-width:350px; margin:0 auto;">
+        <h3 style="text-align:center; margin-bottom:20px; color:#2c3e50;">🔐 Connexion / Inscription</h3>
+        <div class="auth-form">
+          <input type="email" id="authEmail" placeholder="📧 Votre email" required>
+          <input type="password" id="authPassword" placeholder="🔑 Mot de passe (6+ caractères)" required>
+          <button class="btn-inscrire" id="btnInscrire">📝 S'inscrire</button>
+          <button id="btnConnecter">🔓 Se connecter</button>
+          <p style="text-align:center; font-size:13px; color:#888; margin-top:5px;">🔑 Mot de passe : au moins 6 caractères</p>
+        </div>
+      </div>
+    `;
+    document.getElementById('btnInscrire').addEventListener('click', function() {
+      const email = document.getElementById('authEmail').value;
+      const password = document.getElementById('authPassword').value;
+      if (!email || password.length < 6) {
+        alert("Veuillez entrer un email valide et un mot de passe d'au moins 6 caractères.");
+        return;
+      }
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => { alert("✅ Inscription réussie !"); afficherPage('accueil'); })
+        .catch((error) => { alert("❌ Erreur : " + error.message); });
+    });
+    document.getElementById('btnConnecter').addEventListener('click', function() {
+      const email = document.getElementById('authEmail').value;
+      const password = document.getElementById('authPassword').value;
+      if (!email || password.length < 6) {
+        alert("Veuillez entrer un email valide et un mot de passe d'au moins 6 caractères.");
+        return;
+      }
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => { alert("✅ Connexion réussie !"); afficherPage('accueil'); })
+        .catch((error) => { alert("❌ Erreur : " + error.message); });
+    });
+  }
+
+  // ========== PAGE CONTACT ==========
+  else if (nomPage === 'contact') {
+    zoneContenu.innerHTML = `
+      <div class="info-contact">
+        📞 Pour toute question, contactez-nous directement : <br>
+        <span>📧 aniwanouw@gmail.com</span>
+        <span>📱 +2290196052207</span>
+        <p style="margin-top:15px; font-size:14px; color:#888;">Nous vous répondons dans les meilleurs délais !</p>
+        <p style="margin-top:10px; font-size:14px;">💬 Vous pouvez aussi utiliser le chat en bas de l'écran.</p>
+      </div>
+    `;
+  }
+}
+
+// ----- 7. PANIER -----
+window.ajouterAuPanier = function(nom, prix) {
+  const existant = cart.find(item => item.nom === nom);
+  if (existant) {
+    existant.quantite += 1;
+  } else {
+    cart.push({ nom: nom, prix: prix, quantite: 1 });
+  }
+  calculerPanier();
+  alert("✅ " + nom + " (" + prix + " FCFA) ajouté au panier !");
+};
+
+window.viderPanier = function() {
+  if (cart.length === 0) {
+    alert("🛒 Votre panier est déjà vide !");
+    return;
+  }
+  if (confirm("⚠️ Voulez-vous vraiment vider tout votre panier ?")) {
+    cart = [];
+    calculerPanier();
+    alert("🗑️ Panier vidé !");
+  }
+};
+
+function calculerPanier() {
+  let count = 0, total = 0;
+  cart.forEach(item => {
+    count += item.quantite;
+    total += item.prix * item.quantite;
+  });
+  cartCount = count;
+  cartTotal = total;
+  updateCartDisplay();
+}
+
+function updateCartDisplay() {
+  document.getElementById('cartCount').textContent = cartCount;
+  let totalFormate = cartTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  document.getElementById('cartTotal').textContent = totalFormate + " FCFA";
+}
+
+// ----- 8. INITIALISATION -----
+menuItems.forEach(item => {
+  item.addEventListener('click', function(e) {
+    if (this.dataset.page === 'auth' && auth.currentUser) return;
+    afficherPage(this.dataset.page);
+  });
+});
+
+updateCartDisplay();
+afficherPage('accueil');
+
+</script>
+<!-- Début du code Tawk.to -->
+<script>
+var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+(function() {
+    var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = 'https://embed.tawk.to/f28a58924e0c157627eed4896dd0655c2976cbb2/default'; // ← REMPLACE PAR TON LIEN
+    s1.charset = 'UTF-8';
+    s1.setAttribute('crossorigin', '*');
+    s0.parentNode.insertBefore(s1, s0);
+})();
+</script>
+<!-- Fin du code Tawk.to --></body>
+</html>
