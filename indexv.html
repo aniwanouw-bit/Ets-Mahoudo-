@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ets MAHOUDO</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f0eb;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+.conteneur {
+    max-width: 600px;
+    width: 100%;
+    background: white;
+    border-radius: 30px;
+    padding: 25px 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+h1 {
+    color: #5a3e1b;
+    font-size: 24px;
+    text-align: center;
+    border-bottom: 3px solid #b8860b;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+.menu {
+    display: flex;
+    background: #2c3e50;
+    border-radius: 50px;
+    padding: 5px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.menu-item {
+    flex: 1;
+    text-align: center;
+    padding: 12px 5px;
+    font-weight: bold;
+    font-size: 12px;
+    color: white;
+    border-radius: 50px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 55px;
+}
+.menu-item:active { transform: scale(0.95); }
+.menu-item.active { background: #b8860b; color: white; }
+#zoneContenu {
+    background: #f9f6f1;
+    border-radius: 16px;
+    padding: 20px;
+    min-height: 150px;
+    border: 1px solid #eee;
+    font-size: 16px;
+    color: #2c3e50;
+}
+.panier-top {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+.panier-badge {
+    background: #2c3e50;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.panier-badge .nombre { background: #e74c3c; padding: 0 10px; border-radius: 20px; }
+.panier-badge .total { background: #e67e22; padding: 0 10px; border-radius: 20px; }
+.btn-vider {
+    background: transparent;
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+    border-radius: 30px;
+    padding: 2px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+.btn-vider:active { background: #e74c3c; color: white; }
+.produit-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background: white;
+    border-left: 5px solid #b8860b;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    flex-wrap: wrap;
+}
+.produit-avec-image img {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid #eee;
+}
+.produit-nom { font-weight: bold; }
+.produit-prix { color: #b8860b; font-weight: bold; font-size: 14px; }
+.produit-desc { font-size: 12px; color: #888; }
+.btn-ajouter {
+    background: #27ae60;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 8px 14px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.btn-ajouter:active { transform: scale(0.9); background: #1e8449; }
+.form-paiement { max-width: 400px; margin: 0 auto; }
+.form-paiement label { display: block; margin-top: 15px; font-weight: bold; color: #2c3e50; }
+.form-paiement input, .form-paiement select {
+    width: 100%;
+    padding: 14px;
+    border-radius: 30px;
+    border: 1px solid #d4c5b2;
+    font-size: 16px;
+    background: white;
+    margin-top: 5px;
+    outline: none;
+}
+.form-paiement input:focus, .form-paiement select:focus {
+    border-color: #b8860b;
+    box-shadow: 0 0 0 3px rgba(184,134,11,0.2);
+}
+.form-paiement .btn-payer {
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 30px;
+    background: #b8860b;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.form-paiement .btn-payer:active { transform: scale(0.95); }
+.recap-commande {
+    background: #f0f7f0;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border-left: 4px solid #27ae60;
+}
+.page-a-propos { text-align: left; line-height: 1.8; color: #2c3e50; }
+.page-a-propos h2 { margin-bottom: 15px; }
+.page-a-propos h3 { margin-top: 20px; margin-bottom: 10px; }
+.valeur-box {
+    background: #fff8f0;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border-left: 4px solid #b8860b;
+    margin-bottom: 10px;
+}
+.page-contact { text-align: center; }
+.page-contact .coordonnees {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 10px 0;
+    border-left: 4px solid #b8860b;
+}
+.page-contact .coordonnees span { display: block; margin: 8px 0; font-size: 18px; }
+.avertissement {
+    background: #fff8f0;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-left: 4px solid #e67e22;
+    font-size: 14px;
+    color: #555;
+}
+.btn-whatsapp {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 30px;
+    background: #25D366;
+    color: white;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+.btn-whatsapp:active { transform: scale(0.95); }
+#messageStatus { text-align: center; font-weight: bold; margin-top: 10px; color: #27ae60; }
+
+/* ----- PAGE AVIS ----- */
+.page-avis {
+    text-align: center;
+    color: #2c3e50;
+}
+.page-avis h2 {
+    color: #b8860b;
+    margin-bottom: 15px;
+}
+.avis-form {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+}
+.avis-form label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #2c3e50;
+}
+.avis-form input,
+.avis-form textarea,
+.avis-form select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 30px;
+    border: 1px solid #d4c5b2;
+    font-size: 15px;
+    margin-top: 5px;
+    outline: none;
+    background: white;
+    color: #2c3e50;
+}
+.avis-form textarea {
+    border-radius: 16px;
+    min-height: 80px;
+    resize: vertical;
+}
+.avis-form input:focus,
+.avis-form textarea:focus,
+.avis-form select:focus {
+    border-color: #b8860b;
+    box-shadow: 0 0 0 3px rgba(184,134,11,0.2);
+}
+.avis-form .btn-avis {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 30px;
+    background: #b8860b;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.avis-form .btn-avis:active {
+    transform: scale(0.95);
+}
+.etoiles {
+    display: flex;
+    gap: 5px;
+    margin: 5px 0;
+    font-size: 30px;
+    cursor: pointer;
+    justify-content: center;
+}
+.etoiles span {
+    transition: all 0.2s;
+    color: #ddd;
+}
+.etoiles span:hover,
+.etoiles span.active {
+    color: #f1c40f;
+    transform: scale(1.2);
+}
+.liste-avis {
+    text-align: left;
+    margin-top: 20px;
+}
+.avis-item {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    border-left: 4px solid #b8860b;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.avis-item .avis-nom {
+    font-weight: bold;
+    color: #2c3e50;
+}
+.avis-item .avis-etoiles {
+    color: #f1c40f;
+    font-size: 18px;
+    margin: 5px 0;
+}
+.avis-item .avis-date {
+    font-size: 12px;
+    color: #888;
+}
+.avis-item .avis-commentaire {
+    margin-top: 5px;
+    color: #555;
+}
+.avis-vide {
+    text-align: center;
+    color: #888;
+    padding: 20px;
+}
+.avis-note-moyenne {
+    background: #f0f7f0;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border-left: 4px solid #27ae60;
+    font-size: 18px;
+}
+.avis-note-moyenne strong {
+    color: #b8860b;
+    font-size: 22px;
+} /* ----- PAGE FAQ ----- */
+.page-faq {
+    color: #2c3e50;
+}
+.page-faq h2 {
+    color: #b8860b;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.faq-item {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+    overflow: hidden;
+}
+.faq-question {
+    padding: 15px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+.faq-question:active {
+    background: #f0f0f0;
+}
+.faq-question .icone {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+    color: #b8860b;
+}
+.faq-question .icone.ouvert {
+    transform: rotate(180deg);
+}
+.faq-reponse {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    color: #555;
+    line-height: 1.8;
+}
+.faq-reponse.ouvert {
+    max-height: 500px;
+    padding: 0 20px 20px 20px;
+}/* ----- COMPTEUR DE VENTES ----- */
+.compteur-ventes {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(238, 90, 36, 0.3);
+    animation: pulse 2s infinite;
+}
+.compteur-ventes span {
+    font-size: 22px;
+    background: rgba(255,255,255,0.2);
+    padding: 0 12px;
+    border-radius: 30px;
+    margin: 0 5px;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}</style>
+</head>
+<body>
+<div class="conteneur">
+    <h1>🏪 Ets MAHOUDO</h1>
+    <div class="panier-top">
+        <div class="panier-badge">
+            🛒 <span class="nombre" id="panierNombre">0</span> article(s)
+            <span class="total" id="panierTotal">0 FCFA</span>
+            <button class="btn-vider" id="btnViderPanier">🗑️</button>
+        </div>
+    </div>
+    <div class="menu">
+    <button class="menu-item active" data-page="accueil">🏠 Accueil</button>
+    <button class="menu-item" data-page="a-propos">📖 À propos</button>
+    <button class="menu-item" data-page="produits">📦 Produits</button>
+    <button class="menu-item" data-page="paiement">💳 Paiement</button>
+    <button class="menu-item" data-page="avis">⭐ Avis</button>
+    <button class="menu-item" data-page="faq">❓ FAQ</button>
+    <button class="menu-item" data-page="contact">📞 Contact</button>
+}  </div>
+    <div id="zoneContenu">
+        <div style="text-align:center; color:#555;">
+            <h2 style="color:#b8860b;">🏠 Bienvenue sur Ets MAHOUDO</h2>
+            <p style="margin-top:10px;">Nous sommes ravis de vous voir intéressé à notre page ! Vous pouvez également discuter le prix des produits avec nous sans inquiétude</p>
+            <p style="margin-top:10px;">🌿 Découvrez nos produits de bien-être et traditionnels.</p>
+        </div>
+    </div>
+    <div id="messageStatus"></div>
+</div>
+<!-- ============================================================ -->
+<!-- FIN PARTIE 1 -->
+<!-- ============================================================ --><!-- ============================================================ -->
+
+<!-- ============================================================ -->
+<!-- PARTIE 2 : JAVASCRIPT + KKIAPAY (CORRIGÉE) -->
+<!-- ============================================================ -->
+
+<!-- KKiaPay Script -->
+<script src="https://cdn.kkiapay.me/kp.js"></script>
+
+<script>
+// ============================================================
+// 🔑 1. CONFIGURATION (À MODIFIER)
+// ============================================================
+
+// 🔑 REMPLACE PAR TA CLÉ API KKIAPAY (Public Api Key)
+const KKIAPAY_API_KEY = "bbef0154dc176f790b8c5499857619613f800ddd8";
+
+// 🖼️ REMPLACE PAR TES VRAIS LIENS D'IMAGES
+const IMAGES = {
+    gel: "https://i.ibb.co/wrxqHWSJ/70542.jpg",
+    miel: "https://i.ibb.co/bgMcrM50/70546.jpg",
+    savon: "https://i.ibb.co/gZpMQZYH/70544.jpg",
+    herbes: "https://i.ibb.co/tTnNSH2k/70551.jpg"
+};
+
+// ============================================================
+// 2. PANIER
+// ============================================================
+let panier = [];
+
+const panierNombre = document.getElementById('panierNombre');
+const panierTotal = document.getElementById('panierTotal');
+const btnViderPanier = document.getElementById('btnViderPanier');
+const messageStatus = document.getElementById('messageStatus');
+
+function ajouterAuPanier(nom, prix) {
+    const existant = panier.find(item => item.nom === nom);
+    if (existant) {
+        existant.quantite += 1;
+    } else {
+        panier.push({ nom, prix, quantite: 1 });
+    }
+    mettreAJourPanier();
+    messageStatus.textContent = '✅ ' + nom + ' ajouté !';
+    setTimeout(() => { messageStatus.textContent = ''; }, 3000);
+}
+
+function viderPanier() {
+    if (panier.length === 0) {
+        messageStatus.textContent = '🛒 Panier déjà vide';
+        setTimeout(() => { messageStatus.textContent = ''; }, 2000);
+        return;
+    }
+    if (confirm('⚠️ Vider tout le panier ?')) {
+        panier = [];
+        mettreAJourPanier();
+        messageStatus.textContent = '🗑️ Panier vidé !';
+        setTimeout(() => { messageStatus.textContent = ''; }, 2000);
+    }
+}
+
+function mettreAJourPanier() {
+    let nombre = 0;
+    let total = 0;
+    panier.forEach(item => {
+        nombre += item.quantite;
+        total += item.prix * item.quantite;
+    });
+    panierNombre.textContent = nombre;
+    panierTotal.textContent = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + ' FCFA';
+}
+
+btnViderPanier.addEventListener('click', viderPanier);
+
+// ============================================================
+// 3. PAIEMENT KKIAPAY (CORRIGÉE)
+// ============================================================
+function lancerPaiementKKiaPay(montant, email, telephone, nom) {
+    // Construire le message WhatsApp
+    let msg = "🛒 *NOUVELLE COMMANDE Ets MAHOUDO*\n\n";
+    msg += `👤 Nom : ${nom}\n`;
+    msg += `📧 Email : ${email}\n`;
+    msg += `📱 Téléphone : ${telephone}\n\n`;
+    msg += "📦 *Détails de la commande :*\n";
+    
+    let total = 0;
+    panier.forEach(item => {
+        msg += `- ${item.nom} × ${item.quantite} = ${item.prix * item.quantite} FCFA\n`;
+        total += item.prix * item.quantite;
+    });
+    msg += `\n💰 *TOTAL : ${total} FCFA*`;
+
+    const messageEncode = encodeURIComponent(msg);
+    const lienWhatsApp = `https://wa.me/2290199579160?text=${messageEncode}`;
+
+    // Essayer KKiaPay
+    if (typeof kkiapay !== 'undefined') {
+        const isSandbox = true;
+        kkiapay.payment({
+            amount: montant,
+            api_key: KKIAPAY_API_KEY,
+            sandbox: isSandbox,
+            email: email,
+            phone: telephone,
+            name: nom,
+            theme: "light",
+            callback: function(response) {
+                console.log("✅ Paiement réussi !", response);
+                alert("✅ Paiement réussi ! Nous vous contacterons sous 24h.");
+                panier = [];
+                mettreAJourPanier();
+                afficherPage('accueil');
+            },
+            onClose: function() {
+                console.log("Fenêtre de paiement fermée");
+            }
+        });
+    } else {
+        // Fallback WhatsApp
+        alert("💬 Paiement en ligne indisponible. Commande via WhatsApp.");
+        window.open(lienWhatsApp, '_blank');
+        panier = [];
+        mettreAJourPanier();
+        afficherPage('accueil');
+        messageStatus.textContent = '📤 Commande envoyée !';
+        setTimeout(() => { messageStatus.textContent = ''; }, 5000);
+        }
+    
+}
+
+// ============================================================
+// 4. MENU
+// ============================================================
+const zoneContenu = document.getElementById('zoneContenu');
+const menuItems = document.querySelectorAll('.menu-item');
+
+function afficherPage(nomPage) {
+    menuItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.dataset.page === nomPage) {
+            item.classList.add('active');
+        }
+    });
+
+    // ========== ACCUEIL ==========
+    if (nomPage === 'accueil') {
+    // Récupérer le nombre de ventes
+    let ventes = parseInt(localStorage.getItem('ventes_ets_mahoudo')) || 0;
+
+    zoneContenu.innerHTML = `
+        <div style="text-align:center; color:#555;">
+            <h2 style="color:#b8860b;">🏠 Bienvenue sur Ets MAHOUDO</h2>
+            <p style="margin-top:10px;">Nous sommes ravis de vous voir intéressé à notre page ! Vous pouvez également débattre le prix de vos produits commendé avec nous car le temps n'est pas si favorable à quiconque</p>
+            
+            <!-- COMPTEUR DE VENTES -->
+            <div class="compteur-ventes">
+                🔥 <span>${ventes}</span> personnes ont acheté aujourd'hui !
+            </div>
+            
+            <p style="margin-top:10px;">🌿 Découvrez nos produits de bien-être et traditionnels.</p>
+            <p style="margin-top:10px; font-size:14px; color:#888;">📞 Contactez-nous pour toute question.</p>
+        </div>
+        `;
+    }
+
+    // ========== À PROPOS ==========
+    else if (nomPage === 'a-propos') {
+        zoneContenu.innerHTML = `
+            <div class="page-a-propos">
+                <h2 style="color:#b8860b; text-align:center;">📖 À propos de Ets MAHOUDO</h2>
+                <p style="text-align:center; font-size:16px; color:#555;"><em>"La nature au service de votre bien-être"</em></p>
+                <h3>🌿 Notre histoire</h3>
+                <p>Ets MAHOUDO est une entreprise familiale basée non seulement au Bénin mais aussi un peu partout dans le monde, nous sommes aussi à côte d'ivoire, Sénégal, Burkina Faso, Mali, Allemagne, Paris,..
+            , Nous sommes spécialisée dans la vente de produits naturels et traditionnels.</p>
+                <h3>🧴 Nos produits</h3>
+                <ul style="margin-left:20px;">
+                    <li>🧴 Bien-être : gels douche, miel, savons, beaucoup de produits</li>
+                    <li>🌿 Traditionnels : plantes pour la toux, hémorroïdes, vitalité, éjaculation précoce, l'infertilité féminine ou masculin...</li>
+                </ul>
+                <h3>🤝 Nos valeurs</h3>
+                <div class="valeur-box"><strong>🌱 Naturel</strong> — Sans produits chimiques</div>
+                <div class="valeur-box"><strong>🤲 Authenticité</strong> — Savoir-faire traditionnel</div>
+                <div class="valeur-box"><strong>💚 Confiance</strong> — Transparence et honnêteté</div>
+                <div style="margin-top:20px; background:#f0f7f0; padding:15px; border-radius:10px; text-align:center;">
+                    <p style="font-size:14px; color:#888;">⚠️ Informations à titre informatif. Consultez un professionnel de santé.</p>
+                </div>
+            </div>
+        `;
+    }
+
+    // ========== PRODUITS ==========
+else if (nomPage === 'produits') {
+    // Récupérer le nombre de ventes
+    let ventes = parseInt(localStorage.getItem('ventes_ets_mahoudo')) || 0;
+
+    zoneContenu.innerHTML = `
+        <h3 style="color:#b8860b; margin-bottom:15px;">🧴 Produits de bien-être</h3>
+
+        <!-- 🔥 COMPTEUR DE VENTES -->
+        <div class="compteur-ventes" style="margin-bottom:20px;">
+            🔥 <span>${ventes}</span> personnes ont acheté aujourd'hui !
+        </div>
+
+        <div class="produit-item">
+            <div class="produit-avec-image">
+                <img src="${IMAGES.gel}" alt="Gel douche" onerror="this.style.display='none'">
+                <div>
+                    <div class="produit-nom">Gel douche</div>
+                    <div class="produit-prix">💰 1 500 FCFA</div>
+                    <div class="produit-desc">Parfumé aux huiles essentielles</div>
+                </div>
+            </div>
+            <button class="btn-ajouter" onclick="ajouterAuPanier('Gel douche', 1500)">➕ Ajouter</button>
+        </div>
+
+        <div class="produit-item">
+            <div class="produit-avec-image">
+                <img src="${IMAGES.miel}" alt="Miel" onerror="this.style.display='none'">
+                <div>
+                    <div class="produit-nom">Miel original</div>
+                    <div class="produit-prix">💰 3 000 FCFA</div>
+                    <div class="produit-desc">Miel pur non filtré</div>
+                </div>
+            </div>
+            <button class="btn-ajouter" onclick="ajouterAuPanier('Miel original', 3000)">➕ Ajouter</button>
+        </div>
+
+        <div class="produit-item">
+            <div class="produit-avec-image">
+                <img src="${IMAGES.savon}" alt="Savon" onerror="this.style.display='none'">
+                <div>
+                    <div class="produit-nom">Savon au karité</div>
+                    <div class="produit-prix">💰 1 000 FCFA</div>
+                    <div class="produit-desc">Savon doux 100% naturel</div>
+                </div>
+            </div>
+            <button class="btn-ajouter" onclick="ajouterAuPanier('Savon karité', 1000)">➕ Ajouter</button>
+        </div>
+
+        <h3 style="color:#b8860b; margin:30px 0 15px;">🌿 Produits traditionnels</h3>
+        <div class="avertissement">⚠️ Informations à titre informatif. Consultez un professionnel de santé.</div>
+
+        <div class="produit-item">
+            <div class="produit-avec-image">
+                <img src="${IMAGES.herbes}" alt="Anti-toux" onerror="this.style.display='none'">
+                <div>
+                    <div class="produit-nom">Anti-toux</div>
+                    <div class="produit-prix">💰 2 500 FCFA</div>
+                    <div class="produit-desc">Soulage les toux</div>
+                </div>
+            </div>
+            <button class="btn-ajouter" onclick="ajouterAuPanier('Anti-toux', 2500)">➕ Ajouter</button>
+        </div>
+
+        <div class="produit-item">
+            <div class="produit-avec-image">
+                <img src="${IMAGES.herbes}" alt="Anti-hémorroïdes" onerror="this.style.display='none'">
+                <div>
+                    <div class="produit-nom">Anti-hémorroïdes</div>
+                    <div class="produit-prix">💰 3 500 FCFA</div>
+                    <div class="produit-desc">Interne/externe</div>
+                </div>
+            </div>
+            <button class="btn-ajouter" onclick="ajouterAuPanier('Anti-hémorroïdes', 3500)">➕ Ajouter</button>
+        </div>
+
+        <div class="produit-item">
+            <div class="produit-avec-image">
+                <img src="${IMAGES.herbes}" alt="Tonus" onerror="this.style.display='none'">
+                <div>
+                    <div class="produit-nom">Tonus vitalité</div>
+                    <div class="produit-prix">💰 4 000 FCFA</div>
+                    <div class="produit-desc">Vitalité masculine</div>
+                </div>
+            </div>
+            <button class="btn-ajouter" onclick="ajouterAuPanier('Tonus vitalité', 4000)">➕ Ajouter</button>
+        </div>
+
+        <div class="produit-item">
+            <div class="produit-avec-image">
+                <img src="${IMAGES.herbes}" alt="Retour affection" onerror="this.style.display='none'">
+                <div>
+                    <div class="produit-nom">Retour d'affection</div>
+                    <div class="produit-prix">💰 5 000 FCFA</div>
+                    <div class="produit-desc">Harmonie des relations</div>
+                </div>
+            </div>
+            <button class="btn-ajouter" onclick="ajouterAuPanier('Retour affection', 5000)">➕ Ajouter</button>
+        </div>
+
+        <div class="produit-item">
+            <div class="produit-avec-image">
+                <img src="${IMAGES.herbes}" alt="Retour envoyeur" onerror="this.style.display='none'">
+                <div>
+                    <div class="produit-nom">Retour à l'envoyeur</div>
+                    <div class="produit-prix">💰 5 500 FCFA</div>
+                    <div class="produit-desc">Force négative</div>
+                </div>
+            </div>
+            <button class="btn-ajouter" onclick="ajouterAuPanier('Retour envoyeur', 5500)">➕ Ajouter</button>
+        </div>
+
+        <div style="margin-top:25px; background:#e8f5e9; padding:15px; border-radius:10px; border-left:4px solid #27ae60;">
+            <p style="font-weight:bold; color:#2c3e50;">📦 Comment commander ?</p>
+            <p style="font-size:14px; color:#555;">Ajoutez au panier puis cliquez sur "Paiement".</p>
+        </div>
+    `;
+}
+
+    // ========== PAIEMENT ==========
+    else if (nomPage === 'paiement') {
+        if (panier.length === 0) {
+            zoneContenu.innerHTML = `
+                <div style="text-align:center; padding:30px 0;">
+                    <h2 style="color:#e67e22;">🛒 Panier vide</h2>
+                    <p style="margin-top:10px;">Ajoutez des produits dans la page "Produits".</p>
+                    <button onclick="document.querySelector('.menu-item[data-page=\\'produits\\']').click();"
+                            style="margin-top:15px; padding:12px 30px; background:#b8860b; color:white; border:none; border-radius:30px; cursor:pointer; font-weight:bold;">
+                        📦 Voir les produits
+                    </button>
+                </div>
+            `;
+            return;
+        }
+
+        let recap = '';
+        let total = 0;
+        panier.forEach(item => {
+            recap += `<li>${item.nom} × ${item.quantite} = ${item.prix * item.quantite} FCFA</li>`;
+            total += item.prix * item.quantite;
+        });
+
+        zoneContenu.innerHTML = `
+            <h2 style="color:#b8860b; text-align:center;">💳 Finaliser votre commande</h2>
+            <div class="recap-commande">
+                <p style="font-weight:bold;">📦 Récapitulatif :</p>
+                <ul style="margin:10px 0 0 20px; color:#555;">${recap}</ul>
+                <p style="font-weight:bold; margin-top:10px; color:#b8860b;">Total : ${total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} FCFA</p>
+            </div>
+            <div class="form-paiement">
+                <label>👤 Nom complet</label>
+                <input type="text" id="nomComplet" placeholder="Ex: Jean Kouassi">
+                <label>📧 Email</label>
+                <input type="email" id="emailPaiement" placeholder="aniwanouw@gmail.com" value="aniwanouw@gmail.com">
+                <label>📱 Téléphone</label>
+                <input type="tel" id="telephone" placeholder="Ex: 01 99 57 91 60">
+                <label>🌍 Pays de livraison</label>
+                <select id="pays"><option value="">Chargement...</option></select>
+                <label>🏙️ Ville</label>
+                <input type="text" id="ville" placeholder="Ex: Cotonou">
+                <label>📍 Adresse</label>
+                <input type="text" id="adresse" placeholder="Ex: Quartier X, rue Y">
+                <button class="btn-payer" id="btnValiderCommande">💳 Payer maintenant</button>
+            </div>
+            <p style="text-align:center; margin-top:15px; font-size:13px; color:#888;">
+                🔒 Paiement sécurisé par Mobile Money (MTN, Moov)
+            </p>
+        `;
+
+        // Charger la liste des pays
+        async function chargerPays() {
+            try {
+                const res = await fetch('https://restcountries.com/v3.1/all');
+                const pays = await res.json();
+                pays.sort((a,b) => a.name.common.localeCompare(b.name.common));
+                const select = document.getElementById('pays');
+                select.innerHTML = '<option value="">Sélectionnez</option>';
+                pays.forEach(p => {
+                    const opt = document.createElement('option');
+                    opt.value = p.cca2;
+                    opt.textContent = p.name.common;
+                    select.appendChild(opt);
+                });
+            } catch(e) {
+                document.getElementById('pays').innerHTML = 
+                    '<option value="BJ">Bénin</option><option value="CI">Côte d\'Ivoire</option><option value="SN">Sénégal</option><option value="TG">Togo</option>';
+            }
+        }
+        chargerPays();
+
+        // Bouton de validation du paiement
+        document.getElementById('btnValiderCommande').addEventListener('click', function() {
+            const nom = document.getElementById('nomComplet').value;
+            const tel = document.getElementById('telephone').value;
+            const email = document.getElementById('emailPaiement').value;
+            const pays = document.getElementById('pays').value;
+            const ville = document.getElementById('ville').value;
+            const adresse = document.getElementById('adresse').value;
+
+            if (!nom || !tel || !pays || !ville || !adresse) {
+                alert("⚠️ Remplissez tous les champs !");
+                return;
+            }
+
+            // Calculer le total
+            let total = 0;
+            panier.forEach(item => {
+                total += item.prix * item.quantite;
+            });
+
+            if (total === 0) {
+                alert("⚠️ Votre panier est vide !");
+                return;
+            }
+
+            // 🔥 LANCER LE PAIEMENT KKIAPAY
+            lancerPaiementKKiaPay(total, email, tel, nom);
+        });
+    } else if (nomPage === 'faq') {
+    zoneContenu.innerHTML = `
+        <div class="page-faq">
+            <h2>❓ Foire Aux Questions</h2>
+            <p style="text-align:center; color:#888; margin-bottom:20px;">
+                Retrouvez ici les réponses aux questions les plus fréquentes.
+            </p>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    Quels sont les délais de livraison ?
+                    <span class="icone">▼</span>
+                </div>
+                <div class="faq-reponse">
+                    Nos délais de livraison sont généralement de <strong>24 à 48 heures</strong> pour les commandes au Bénin. Pour les livraisons internationales, comptez entre <strong>3 à 7 jours</strong> selon le pays.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    Comment utiliser vos produits traditionnels ?
+                    <span class="icone">▼</span>
+                </div>
+                <div class="faq-reponse">
+                    Chaque produit est livré avec un <strong>mode d'emploi détaillé</strong>. Nous vous recommandons de suivre scrupuleusement les indications. En cas de doute, n'hésitez pas à nous contacter pour des conseils personnalisés.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    Quels sont les moyens de paiement acceptés ?
+                    <span class="icone">▼</span>
+                </div>
+                <div class="faq-reponse">
+                    Nous acceptons les paiements par <strong>Mobile Money (MTN MoMo, Moov Money)</strong> via KKiaPay, ainsi que les <strong>cartes bancaires</strong> (Visa, Mastercard). Vous pouvez aussi passer commande par WhatsApp et payer à la livraison.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    Livrez-vous à l'international ?
+                    <span class="icone">▼</span>
+                </div>
+                <div class="faq-reponse">
+                    Oui, nous livrons dans plusieurs pays d'Afrique de l'Ouest et en Europe. Les frais de livraison varient selon le pays. Contactez-nous pour un devis personnalisé.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    Vos produits traditionnels sont-ils certifiés ?
+                    <span class="icone">▼</span>
+                </div>
+                <div class="faq-reponse">
+                    Nos produits sont issus de la <strong>pharmacopée traditionnelle</strong> et préparés selon des méthodes ancestrales. Nous vous conseillons de consulter un professionnel de santé avant utilisation, surtout si vous suivez un traitement médical.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    Puis-je retourner un produit si je ne suis pas satisfait ?
+                    <span class="icone">▼</span>
+                </div>
+                <div class="faq-reponse">
+                    Nous accordons une importance particulière à la satisfaction de nos clients. Si vous n'êtes pas satisfait, vous disposez d'un <strong>délai de 7 jours</strong> pour nous contacter. Nous trouverons ensemble une solution (échange ou remboursement).
+                </div>
+            </div>
+
+            <p style="text-align:center; margin-top:25px; font-size:14px; color:#888;">
+                💬 Vous n'avez pas trouvé votre réponse ? 
+                <a href="#" onclick="document.querySelector('.menu-item[data-page=\\'contact\\']').click();" 
+                   style="color:#b8860b; font-weight:bold; text-decoration:none;">
+                    Contactez-nous
+                </a>
+            </p>
+        </div>
+    `;
+} else if (nomPage === 'avis') {
+    // Récupérer les avis sauvegardés
+    let avis = JSON.parse(localStorage.getItem('avis_ets_mahoudo')) || [];
+
+    // Calculer la note moyenne
+    let noteMoyenne = 0;
+    if (avis.length > 0) {
+        let total = 0;
+        avis.forEach(a => total += a.note);
+        noteMoyenne = (total / avis.length).toFixed(1);
+    }
+
+    // Générer les étoiles HTML
+    function genererEtoiles(note) {
+        let etoiles = '';
+        for (let i = 1; i <= 5; i++) {
+            etoiles += i <= note ? '⭐' : '☆';
+        }
+        return etoiles;
+    }
+
+    // Générer la liste des avis
+    let listeAvisHtml = '';
+    if (avis.length === 0) {
+        listeAvisHtml = `<div class="avis-vide">📝 Aucun avis pour le moment. Soyez le premier à donner votre avis !</div>`;
+    } else {
+        // Trier les avis du plus récent au plus ancien
+        const avisTries = [...avis].reverse();
+        avisTries.forEach(a => {
+            const date = new Date(a.date);
+            const dateFormatee = date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+            listeAvisHtml += `
+                <div class="avis-item">
+                    <div class="avis-nom">👤 ${a.nom}</div>
+                    <div class="avis-etoiles">${genererEtoiles(a.note)}</div>
+                    <div class="avis-date">${dateFormatee}</div>
+                    <div class="avis-commentaire">${a.commentaire}</div>
+                </div>
+            `;
+        });
+    }
+
+    // Afficher la page
+    zoneContenu.innerHTML = `
+        <div class="page-avis">
+            <h2>⭐ Avis clients</h2>
+
+            ${avis.length > 0 ? `
+                <div class="avis-note-moyenne">
+                    📊 Note moyenne : <strong>${noteMoyenne} / 5</strong> (${avis.length} avis)
+                </div>
+            ` : ''}
+
+            <div class="avis-form">
+                <h3 style="color:#b8860b; margin-bottom:15px;">📝 Donnez votre avis</h3>
+
+                <label>👤 Votre nom</label>
+                <input type="text" id="avisNom" placeholder="Ex: Jean Kouassi">
+
+                <label>⭐ Votre note</label>
+                <div class="etoiles" id="avisEtoiles">
+                    <span data-note="1">☆</span>
+                    <span data-note="2">☆</span>
+                    <span data-note="3">☆</span>
+                    <span data-note="4">☆</span>
+                    <span data-note="5">☆</span>
+                </div>
+                <input type="hidden" id="avisNote" value="0">
+
+                <label>💬 Votre commentaire</label>
+                <textarea id="avisCommentaire" placeholder="Partagez votre expérience avec nos produits..."></textarea>
+
+                <button class="btn-avis" id="btnEnvoyerAvis">📤 Envoyer mon avis</button>
+            </div>
+
+            <h3 style="color:#b8860b; margin-top:20px;">📋 Tous les avis</h3>
+            <div class="liste-avis">
+                ${listeAvisHtml}
+            </div>
+        </div>
+    `;
+
+    // ---- GÉRER LE SYSTÈME D'ÉTOILES ----
+    const etoiles = document.querySelectorAll('#avisEtoiles span');
+    const avisNote = document.getElementById('avisNote');
+
+    etoiles.forEach(etoile => {
+        etoile.addEventListener('click', function() {
+            const note = parseInt(this.dataset.note);
+            avisNote.value = note;
+            etoiles.forEach(e => {
+                const n = parseInt(e.dataset.note);
+                if (n <= note) {
+                    e.textContent = '⭐';
+                    e.classList.add('active');
+                } else {
+                    e.textContent = '☆';
+                    e.classList.remove('active');
+                }
+            });
+        });
+    });
+
+    // ---- ENVOYER UN AVIS ----
+    document.getElementById('btnEnvoyerAvis').addEventListener('click', function() {
+        const nom = document.getElementById('avisNom').value.trim();
+        const note = parseInt(avisNote.value);
+        const commentaire = document.getElementById('avisCommentaire').value.trim();
+
+        if (!nom) {
+            alert("⚠️ Veuillez entrer votre nom.");
+            return;
+        }
+        if (note === 0) {
+            alert("⚠️ Veuillez sélectionner une note (1 à 5 étoiles).");
+            return;
+        }
+        if (!commentaire) {
+            alert("⚠️ Veuillez écrire un commentaire.");
+            return;
+        }
+
+        // Sauvegarder l'avis
+        const avis = JSON.parse(localStorage.getItem('avis_ets_mahoudo')) || [];
+        avis.push({
+            nom: nom,
+            note: note,
+            commentaire: commentaire,
+            date: new Date().toISOString()
+        });
+        localStorage.setItem('avis_ets_mahoudo', JSON.stringify(avis));
+
+        alert("✅ Merci pour votre avis ! Il sera affiché immédiatement.");
+
+        // Recharger la page des avis
+        afficherPage('avis');
+    });
+}
+
+    // ========== CONTACT ==========
+    else if (nomPage === 'contact') {
+        zoneContenu.innerHTML = `
+            <div class="page-contact">
+                <h2 style="color:#b8860b;">📞 Contactez-nous</h2>
+                <div class="coordonnees">
+                    <span>📧 <strong>aniwanouw@gmail.com</strong></span>
+                    <span>📱 <strong>+229 96 05 22 07</strong></span>
+                    <span>💬 <strong>+229 01 99 57 91 60</strong></span>
+                </div>
+                <p style="margin-top:15px; color:#888;">Nous vous répondons dans les meilleurs délais !</p>
+                <a href="https://wa.me/2290199579160" target="_blank" class="btn-whatsapp">💬 Nous écrire sur WhatsApp</a>
+            </div>
+        `;
+    }
+}
+
+// ============================================================
+// 5. INITIALISATION
+// ============================================================
+menuItems.forEach(item => {
+    item.addEventListener('click', function() {
+        afficherPage(this.dataset.page);
+    });
+});
+
+mettreAJourPanier();
+afficherPage('accueil');
+console.log('✅ Site Ets MAHOUDO avec KKiaPay prêt !');
+console.log('🔑 Clé API KKiaPay :', KKIAPAY_API_KEY);
+// ============================================================
+// 6. FONCTION FAQ (toggle)
+// ============================================================
+window.toggleFAQ = function(element) {
+    // Trouver la réponse
+    const reponse = element.nextElementSibling;
+    const icone = element.querySelector('.icone');
+
+    // Fermer toutes les autres FAQ
+    document.querySelectorAll('.faq-reponse').forEach(r => {
+        if (r !== reponse && r.classList.contains('ouvert')) {
+            r.classList.remove('ouvert');
+            const parent = r.closest('.faq-item');
+            if (parent) {
+                const icon = parent.querySelector('.icone');
+                if (icon) icon.classList.remove('ouvert');
+            }
+        }
+    });
+
+    // Ouvrir/fermer celle-ci
+    reponse.classList.toggle('ouvert');
+    icone.classList.toggle('ouvert');
+};</script>
+</body>
+</html>
