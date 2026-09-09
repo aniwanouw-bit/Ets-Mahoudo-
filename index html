@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>⭐SITE SÉCURISÉ XXX CLIENTS SATISFAITS</title>
+    <style>/* ===== BOUTON "À PROPOS" ===== */
+.btn-about {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 30px;
+    background: #ffd700;
+    color: #000;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.btn-about:hover {
+    background: #ffed4a;
+    transform: scale(1.05);
+}
+
+/* ===== MODALE (fenêtre pop-up) ===== */
+.modal {
+    display: none; /* cachée au départ */
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    overflow-y: auto;
+    animation: fadeIn 0.4s;
+}
+
+.modal-content {
+    background-color: #1a1a2e;
+    margin: 10% auto;
+    padding: 30px 25px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 25px;
+    border: 3px solid #ffd700;
+    color: #fff;
+    box-shadow: 0 0 50px rgba(255, 215, 0, 0.2);
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 35px;
+    font-weight: bold;
+    color: #ffd700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.close-btn:hover {
+    color: #ff6b6b;
+    transform: rotate(90deg);
+}
+
+.letter-text {
+    text-align: left;
+    font-size: 17px;
+    line-height: 1.8;
+    padding: 10px 5px;
+}
+.letter-text p {
+    margin: 12px 0;
+}
+
+/* Animation d'apparition */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+        body {
+            background-color: #0d0d0d;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #ffd700;
+            font-size: 2em;
+            border-bottom: 3px solid #ffd700;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        /* Style de l'image principale (cliquable) */
+        .main-image {
+            width: 300px;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 4px solid #ffd700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+        .main-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* Zone des 3 photos (cachée au départ) */
+        .gallery {
+            display: none; /* invisible au départ */
+            margin-top: 30px;
+            padding: 20px;
+            background: #1a1a2e;
+            border-radius: 20px;
+            border: 2px solid #ffd700;
+        }
+
+        .gallery img {
+            width: 90%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 15px;
+            border: 3px solid #fff;
+            margin: 10px 0;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Style des vidéos */
+        .video-container {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .video-container video {
+            width: 90%;
+            max-width: 400px;
+            border-radius: 15px;
+            border: 3px solid #ffd700;
+            background: #000;
+        }
+
+        .video-container p {
+            color: #aaa;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .btn-retour {
+            margin-top: 30px;
+            padding: 10px 25px;
+            background: #ffd700;
+            color: #000;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-retour:hover {
+            background: #ffed4a;
+        }
+    </style>
+</head>
+<body>
+
+  <h1>📸 SITE SÉCURISÉ XXX CLIENTS SATISFAITS DE MONIQUE FUENTES</h1>
+
+<!-- NOUVEAU BOUTON -->
+<button class="btn-about" onclick="openLetter()">📖 À propos de moi</button>
+
+    <!-- Image principale cliquable -->
+    <img src="F_JQh2oWkAAPUYj.jpg_large.jpg" alt="Clique sur moi" class="main-image" id="mainImage">
+
+    <!-- Zone des 3 photos (cachée) -->
+    <div class="gallery" id="gallery">
+        <img src="F6o0B3BWwAIr4Q6.jpg_large.jpg" alt="Photo 1">
+        <img src="GqyiA-KWcAAvL2D.jpg_large.jpg" alt="Photo 2">
+        <img src="F6oWE-RXUAE3ZqX.jpg_large.jpg" alt="Photo 3">    <!-- Deux vidéos -->
+    <div class="video-container">
+        <div>
+            <video controls>
+                <source src="Mo1.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo.
+            </video>
+            <p>🎬 I'll be yours if you want me to be.  </p>
+        </div> <div>
+            <video controls>
+                <source src="mon3.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo.
+            </video>
+            <p>🎬 Enfonces moi avec Ton pénis</p>
+        </div>
+        <div>
+            <video controls>
+                <source src="mon4.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo.
+            </video>
+            <p>🎬 I need your penis 🍆 Come and enjoy</p>
+        </div>
+        <div>
+            <video controls>
+                <source src="Monique 2.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo.
+            </video>
+            <p>🎬 Satisfying you like that? The best thing in life. </p>
+        </div>
+    </div></div>    <!-- Bouton pour tout remettre en ordre -->
+    <button class="btn-retour" onclick="resetAlbum()">🔁 Réinitialiser</button>
+
+    <script>
+        // Récupérer les éléments
+        const mainImage = document.getElementById('mainImage');
+        const gallery = document.getElementById('gallery');
+        let isGalleryOpen = false;
+
+        // Au clic sur l'image principale
+        mainImage.addEventListener('click', function() {
+            if (isGalleryOpen) {
+                // Si déjà ouvert, on ferme
+                gallery.style.display = 'none';
+                isGalleryOpen = false;
+                mainImage.style.borderColor = '#ffd700';
+            } else {
+                // On affiche les 3 photos
+                gallery.style.display = 'block';
+                isGalleryOpen = true;
+                mainImage.style.borderColor = '#00ff88';
+
+                // Faire défiler jusqu'à la galerie
+                setTimeout(() => {
+                    gallery.scrollIntoView({ behavior: 'smooth' });
+                }, 200);
+            }
+        });
+
+        // Fonction pour réinitialiser
+        function resetAlbum() {
+            gallery.style.display = 'none';
+            isGalleryOpen = false;
+            mainImage.style.borderColor = '#ffd700';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    // ===== FONCTIONS POUR LA LETTRE =====
+function openLetter() {
+    document.getElementById('letterModal').style.display = 'block';
+    document.body.style.overflow = 'hidden'; // empêche le défilement
+}
+
+function closeLetter() {
+    document.getElementById('letterModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Fermer la modale en cliquant en dehors (sur le fond)
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('letterModal');
+    if (event.target === modal) {
+        closeLetter();
+    }
+});</script>
+
+<!-- ====== FENÊTRE MODALE POUR LA LETTRE ====== --><div id="letterModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeLetter()">&times;</span>
+        <h2>💌 VOUS ÊTES SUR LE SITE OFFICIEL ET SÉCURISÉ DE Monique Fuentes</h2>
+        <div class="letter-text">
+            <p>Toutes vos données et vos paiements sont protégés et cryptés à 100%</p>
+            <p>Ici vous pouvez faire votre choix en toute confiance, prendre rendez-vous selon vos disponibilités et remplir les conditions 
+            </p>
+          <p>Mes tarifs:
+            </p><p>1h 100€</p><p>2h 150€</p><p>3h 250€</p><p>Nuit 500€</p><p>MES PRESTATIONS </p><p>Je pratique :</p><p>LEVRETTE, SODOMIE,</p><p>FELLATION,AVALE SPERME,</p><p>EJACULATION </p><p>POSITION QUE TU VEUX </p><p>MASSAGE SUBLIMES...</p><p>Paiment sécurisé ✔️</p>Données protégé ✔️
+            <p><p>Rendez-vous confirmé immédiatement </p><p>Ce site est 100% sécurisé.</p>
+                POUR FAIRE LA RÉSERVATION C'EST SIMPLE IL FAUT : 👇👇
+            </p><p>1) Choisir votre prestation </p><p>2) Prendre RDV à la date qui vous arrange</p><p>3) Cliquer sur le bouton Vert qui est en bas pour écrire avec moi en temps réel,je parles anglais et français,Remplire les conditions </p>
+            <p style="text-align: right; font-style: italic;">
+                C'est simple, rapide et sans risqu. <br>
+                <strong>Monique Fuentes</strong>
+            </p>
+        </div>
+    </div>
+</div><!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a3d6ad9680a601d49f66930/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</body>
+</html>
